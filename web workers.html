@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>Start Worker</title>
+      
+      <script> // miejsce na kod java
+         function sayHello(){
+            alert("Witam Ciê Bartek" ); // wyswietli sie okienko z tekstem
+         }
+      </script> 
+      <script>
+        var worker1 = new Worker('worker.js'); //tworzymy nowego workera
+        function worker(){
+        worker1.onmessage = function (event) { //mozliwosc otrzymywania powiadomien od w¹tku
+        document.getElementById('result1').textContent = event.data; //pobiera wartosc result1
+        };
+
+      }
+      
+      function stopWorker() {  //zatrzymanie workera
+           worker1.terminate();
+           worker1 = undefined;
+}
+      
+      </script>
+      
+   </head>
+   <body>
+      
+      <input type="button" onclick="worker();" value="Start Worker" /> <!--start-->
+      <input type="button" onclick="sayHello();" value="Say Hello" /> <!--okienko hello-->
+      <input type="button" onclick="stopWorker();" value="Stop Worker" /> <!--stop-->
+      <blockquote><p>wartoœæ: <output id="result1"></output></p></blockquote> <!--wyswietlanie wartosci-->
+   </body>
+</html>
